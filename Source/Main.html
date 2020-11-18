@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+    <body>
+
+        
+        <div class="container">
+            <form action="" method="POST" onsubmit=" 
+            document.getElementById('inputTime').value=new Date().toLocaleString();">
+                <div class="row">
+                <div class="col">
+                    <input type="text" class="form-control" id="Voornaam" placeholder="Voornaam" name="Voornaam">
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" id="Naam" placeholder="Naam" name="Naam">
+                </div>
+                <input  id='inputTime' name='time' type='hidden'>
+                <div class="col">
+                    <input type="submit" value="submit"> </div>
+                </div>
+            </form>
+            
+        </div>
+        <div class="container">
+            <table class="table table-dark table-striped" >
+                <thead>
+                
+                    <tr><th>Voornaam</th><th>Naam</th><th>Tijd</th></tr>
+            
+                </thead>
+            
+                <tr id='row'></tr>
+            </table>
+
+            <script>
+                
+                fetch('/Info.json')
+            
+                    .then(res => res.json())
+                    .then(info =>{
+                        const row = document.getElementById('row');
+                        info.forEach(el =>{
+                            console.log(el)
+                            voornaam = JSON.stringify(el.Voornaam).replace("+", " ").replace(/"/g, "");
+                            naam = JSON.stringify(el.Naam).replace("+", " ").replace(/"/g, "");
+                            tijd = JSON.stringify(el.Tijd).replace("+", " ").replace(/%3A/g, ":").replace(/"/g, "");
+                            row.insertAdjacentHTML('beforebegin',
+
+                            `<tr>
+                                <td>${voornaam}</td>
+
+                                <td>${naam}</td>
+
+                                <td>${tijd}</td>
+
+                            </tr>`);
+                        })
+            
+                        row.remove()
+            
+                    }) 
+            
+            </script>
+
+        </div>
+
+    </body>
+</html>
