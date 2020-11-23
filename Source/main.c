@@ -54,7 +54,7 @@ main ()
         system("truncate -s-2 /var/www/html/Info.json");
 
         FILE *json = fopen("/var/www/html/Info.json", "a");
-        fprintf(json, ",\n\t{\n\t\t\"Voornaam\": \"%s\",\n\t\t\"Naam\": \"%s\",\n\t\t\"Tijd\": \"%s\"\n\t}\n]",Voornaam,Naam,inputTime);
+        fprintf(json, ",\n\t{\n\t\t\"Voornaam\": \"%s\",\"Naam\": \"%s\",\"Tijd\": \"%s\"\n\t}\n]",Voornaam,Naam,inputTime);
 
     }
 
